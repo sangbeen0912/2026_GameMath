@@ -9,17 +9,32 @@ public class test : MonoBehaviour
     private Vector3 targetPosition;
     private bool isMoving = false;
     private bool isSprinting = false;
+     private bool isLeftParry = false;
+     private bool isRightParry = false;
+
 
 
     public void OnPoint(InputValue value)
     {
      
-      mouseScreenPosition = value.Get<Vector2>(); //¸¶¿ì½º À§Ä¡ ¾÷µ¥ÀÌÆ®
+      mouseScreenPosition = value.Get<Vector2>(); //ï¿½ï¿½ï¿½ì½º ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     }
         
     public void OnSprint(InputValue value)
     {
-         isSprinting = value.isPressed; // ¹öÆ°À» ´©¸£°í ÀÖÀ¸¸é O ‹š¸é X
+         isSprinting = value.isPressed; // ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ O ï¿½ï¿½ï¿½ï¿½ X
+
+    }
+
+    public void OnLeftParry(InputValue value)
+    {
+         isLeftParry = value.isPressed; // ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ O ï¿½ï¿½ï¿½ï¿½ X
+
+    }
+
+    public void OnRightParry(InputValue value)
+    {
+         isRightParry = value.isPressed; // ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ O ï¿½ï¿½ï¿½ï¿½ X
 
     }
 
@@ -28,19 +43,19 @@ public class test : MonoBehaviour
         if ( value.isPressed)
         {
             Ray ray = Camera.main.ScreenPointToRay(mouseScreenPosition);
-            RaycastHit[] hits = Physics.RaycastAll(ray); //·¹ÀÌÀú °æ·Î¿¡ ÀÖ´Â ¸ðµç ¹°Ã¼¸¦ Å½»ö
+            RaycastHit[] hits = Physics.RaycastAll(ray); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ Å½ï¿½ï¿½
 
-            foreach (RaycastHit hit in hits )//¸ðµç ¹°Ã¼¿¡ ÇÑ¿¡ ¹Ýº¹
+            foreach (RaycastHit hit in hits )//ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ñ¿ï¿½ ï¿½Ýºï¿½
             {
-                if (hit.collider.gameObject != gameObject) //ºÎ‹HÈù ¹°Ã¼°¡ ³ª ÀÚ½ÅÀÌ ¾Æ´Ò‹š¸¸
+                if (hit.collider.gameObject != gameObject) //ï¿½Î‹Hï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½Æ´Ò‹ï¿½ï¿½ï¿½
                 {
 
 
-                  targetPosition = hit.point;  //plane¿¡ ºÎ‹HÈù ÁöÁ¡À» Å¸°Ù
+                  targetPosition = hit.point;  //planeï¿½ï¿½ ï¿½Î‹Hï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½
                   targetPosition.y = transform.position.y;
                   isMoving = true;
 
-                  break; //Å½»ö ÇßÀ¸´Ïforeach ¹Ýº¹ Áß´Ü
+                  break; //Å½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½foreach ï¿½Ýºï¿½ ï¿½ß´ï¿½
                 }
             }
         }
